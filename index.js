@@ -97,6 +97,10 @@ function spawnFood () {
   $(randomCell).addClass('food')
 }
 
+function consumeFood (foodCell) {
+  foodCell.removeClass('food')
+}
+
 // --- UTILS ---
 
 function returnRandomInt (max) {
@@ -104,7 +108,8 @@ function returnRandomInt (max) {
 }
 
 function checkForCollisions (newCell) {
-  if (!$(newCell).is('td')) gameOver()
+  if (!newCell.is('td')) gameOver()
+  if (newCell.hasClass('food')) consumeFood(newCell)
 }
 
 function gameOver () {
