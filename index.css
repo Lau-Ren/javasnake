@@ -1,13 +1,29 @@
+table {
+  margin-right: center;
+  margin-left: center;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 10;
+  margin-bottom: 30;
+}
+
 td {
   background-color: LightGrey;
   height: 25px;
   width: 25px;
 }
 
-td.player {
-  background-color: green;
+td.food {
+  background-color: LightGreen;
 }
 
-td.food {
-  background-color: red;
+td.tail {
+  background-color: GreenYellow;
+}
+
+td.player {
+  background-color: green;
 }
