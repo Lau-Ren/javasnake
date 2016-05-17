@@ -1,0 +1,13 @@
+td {
+  background-color: LightGrey;
+  height: 25px;
+  width: 25px;
+}
+
+td.player {
+  background-color: green;
+}
+
+td.food {
+  background-color: red;
+}
