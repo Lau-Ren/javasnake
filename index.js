@@ -93,6 +93,11 @@ function spawnPlayer (playerCell) {
   playerCell.addClass('player')
 }
 
+function checkForCollisions (newCell) {
+  if (!newCell.is('td') || newCell.hasClass('tail')) gameOver()
+  if (newCell.hasClass('food')) consumeFood(newCell)
+}
+
 // --- FOOD ---
 var foodSpawnFrequency = 2000
 
@@ -109,8 +114,7 @@ function handleFood () {
 }
 
 function spawnFood () {
-  var randomCell = returnRandomCell()
-  $(randomCell).addClass('food')
+  $(returnRandomCell()).addClass('food')
 }
 
 function consumeFood (foodCell) {
@@ -138,13 +142,8 @@ function returnRandomInt (max) {
   return Math.floor(Math.random() * (max - 0 + 1)) + 0
 }
 
-function checkForCollisions (newCell) {
-  if (!newCell.is('td') || newCell.hasClass('tail')) gameOver()
-  if (newCell.hasClass('food')) consumeFood(newCell)
-}
-
 function gameOver () {
-  // alert('game over! evidently you suck...')
+  alert('Gameover!')
   window.location.reload()
 }
 
