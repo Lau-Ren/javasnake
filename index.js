@@ -1,5 +1,7 @@
 // --- TABLE ---
 var generateBoard = require('./lib/generateBoard')
+var handleInputs = require('./lib/handleInputs')
+var inputController = require('./lib/inputController')
 
 function returnCellByDirection (oldCell, direction) {
   let cells = {
@@ -26,16 +28,7 @@ var previousCell
 var playerSpeed = 300
 var direction = 3
 
-function handleInputs (e) {
-  var newDirection
-  if (e.which === 38) newDirection = 1
-  if (e.which === 39) newDirection = 2
-  if (e.which === 40) newDirection = 3
-  if (e.which === 37) newDirection = 4
-  window.clearInterval(movementInterval)
-  handleMovement(newDirection)
-  startMovementInterval()
-}
+
 
 function directionValid (newDirection) {
   if (tail.length > 0) {
@@ -128,7 +121,7 @@ function returnRandomInt (max) {
 }
 
 function gameOver () {
-  alert('Gameover!')
+  // alert('Gameover!')
   window.location.reload()
 }
 
@@ -136,7 +129,8 @@ function gameOver () {
 $(function () {
   generateBoard(15)
   spawnPlayer($('#cell_0_7'))
-  $(document).on("keyup", handleInputs)
+  // $(document).on("keyup", handleInputs)
   startMovementInterval()
   startFoodInterval()
+  inputController.listen()
 })
