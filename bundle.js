@@ -177,8 +177,9 @@ module.exports = function handleInputs (e) {
 },{"./handleMovement":5,"./intervalController":7}],5:[function(require,module,exports){
 
 },{}],6:[function(require,module,exports){
-var handleMovement = require('./handleMovement')
-var intervalController = require('./intervalController')
+var intervals = require('./intervalController')
+var player = require('./playerController')
+
 var inputs = new Map([
    [38, 1],
    [39, 2],
@@ -192,30 +193,20 @@ var inputs = new Map([
 
 module.exports = {
   listen: function () {
-    $(document).on("keyup", this.recieveInput)
+    $(document).on("keyup", this.recieveInput.bind(this))
   },
 
   recieveInput: function (key) {
-    if (!inputs.get(key.which)) return
-    this.processInput(key.which)
+    var newDirection = inputs.get(key.which)
+    if (newDirection) this.processInput(newDirection)
   },
 
   processInput: function (input) {
-    if (Math.abs(input - player.direction)) console.log('backwards!')
+    if (Math.abs(input - player.direction) === 2) return
   }
 }
-// }function handleInputs (e) {
-//   var newDirection =
-//   if (e.which === 38) newDirection = 1
-//   if (e.which === 39) newDirection = 2
-//   if (e.which === 40) newDirection = 3
-//   if (e.which === 37) newDirection = 4
-//   intervalController.setMovementInterval(false)
-//   handleMovement(newDirection)
-//   intervalController.setMovementInterval(true)
-// }
 
-},{"./handleMovement":5,"./intervalController":7}],7:[function(require,module,exports){
+},{"./intervalController":7,"./playerController":8}],7:[function(require,module,exports){
 var player = require('./playerController')
 var food = require('./foodController')
 
@@ -242,7 +233,8 @@ module.exports = {
 
 },{"./foodController":2,"./playerController":8}],8:[function(require,module,exports){
 module.exports = {
-  speed: 300
+  speed: 300,
+  direction: 3
 }
 
 },{}]},{},[1]);
