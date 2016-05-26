@@ -1,136 +1,14 @@
 // --- TABLE ---
-var generateBoard = require('./lib/generateBoard')
-var handleInputs = require('./lib/handleInputs')
+var tableController = require('./lib/tableController')
 var inputController = require('./lib/inputController')
+var playerController = require('./lib/playerController')
+var intervalController = require('./lib/intervalController')
 
-function returnCellByDirection (oldCell, direction) {
-  let cells = {
-    1: oldCell.closest('tr').prev().children().eq(oldCell.index()),
-    2: oldCell.next(),
-    3: oldCell.closest('tr').next().children().eq(oldCell.index()),
-    4: oldCell.prev()
-  }
-  return cells[direction]
-}
-
-function returnRandomCell () {
-  let cells = $('td').toArray()
-  let randomCell = $(cells[returnRandomInt(cells.length)])
-  while (randomCell.hasClass('player') || randomCell.hasClass('tail')) {
-    randomCell = $(cells[returnRandomInt(cells.length)])
-  }
-  return randomCell
-}
-
-// --- MOVEMENT ---
-var movementInterval
-var previousCell
-var playerSpeed = 300
-var direction = 3
-
-
-
-function directionValid (newDirection) {
-  if (tail.length > 0) {
-    if (direction === 1 && newDirection === 3) return false
-    if (direction === 2 && newDirection === 4) return false
-    if (direction === 3 && newDirection === 1) return false
-    if (direction === 4 && newDirection === 2) return false
-  }
-  return true
-}
-
-function handleMovement (newDirection) {
-  if (newDirection) {
-    if (directionValid(newDirection)) {
-      direction = newDirection
-    } else {
-      return
-    }
-  }
-  var oldCell = $('.player')
-  var newCell = returnCellByDirection(oldCell, direction)
-  checkForCollisions(newCell)
-  movePlayer(oldCell, newCell)
-  updateTail(oldCell)
-}
-
-function movePlayer (oldCell, newCell) {
-  oldCell.removeClass('player')
-  newCell.addClass('player')
-}
-
-function startMovementInterval () {
-  movementInterval = window.setInterval(function() {
-    handleMovement()
-  }, playerSpeed)
-}
-
-// --- PLAYER ---
-function spawnPlayer (playerCell) {
-  playerCell.addClass('player')
-}
-
-function checkForCollisions (newCell) {
-  if (!newCell.is('td') || newCell.hasClass('tail')) gameOver()
-  if (newCell.hasClass('food')) consumeFood(newCell)
-}
-
-// --- FOOD ---
-var foodSpawnFrequency = 2000
-
-function startFoodInterval () {
-  var foodInterval = window.setInterval(function() {
-    handleFood()
-  }, foodSpawnFrequency)
-}
-
-function handleFood () {
-  if (!$('td').hasClass('food')) {
-    spawnFood()
-  }
-}
-
-function spawnFood () {
-  $(returnRandomCell()).addClass('food')
-}
-
-function consumeFood (foodCell) {
-  foodCell.removeClass('food')
-  foodCell.addClass('tail')
-  tail.unshift(foodCell.attr('id'))
-}
-
-// --- TAIL ---
-var tail = []
-
-function updateTail (newCell) {
-  var previousCell
-  for (let i = 0; i < tail.length; i++) {
-    $(tail[i]).removeClass('tail')
-    $(newCell).addClass('tail')
-    previousCell = tail[i]
-    tail[i] = newCell
-    newCell = previousCell
-  }
-}
-
-// --- UTILS ---
-function returnRandomInt (max) {
-  return Math.floor(Math.random() * (max - 0 + 1)) + 0
-}
-
-function gameOver () {
-  // alert('Gameover!')
-  window.location.reload()
-}
-
-// --- RUN ---
+// --- RUN --- //
 $(function () {
-  generateBoard(15)
-  spawnPlayer($('#cell_0_7'))
-  // $(document).on("keyup", handleInputs)
-  startMovementInterval()
-  startFoodInterval()
+  tableController.generateTable(15)
+  playerController.spawnPlayer($('#cell_0_7'))
   inputController.listen()
+  intervalController.setMovementInterval(true)
+  intervalController.setFoodInterval(true)
 })
