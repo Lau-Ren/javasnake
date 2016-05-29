@@ -1,4 +1,3 @@
-// --- TABLE ---
 var tableController = require('./lib/tableController')
 var inputController = require('./lib/inputController')
 var playerController = require('./lib/playerController')
