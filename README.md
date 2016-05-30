@@ -1,4 +1,4 @@
-# Object Oriented Javasnake
+# Javasnake
 Build a simple [snake game](http://playsnake.org/) with HTML, Object Oriented JavaScript, CSS and jQuery.
 
 ## Learning Objectives
