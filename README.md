@@ -31,13 +31,13 @@ The HTML for this project will be very minimal. We'll be building the table and 
   </body>
 </html>
 ```
-The only real points of interest here are the script calls for jQuery and bundle.js. The project is set up to use watchify, so all of the code in our lib directory will get bundled up and served to our index.html when the `npm start` command is run.
+The only real points of interest here are the script calls for jQuery and bundle.js. The project is set up to use watchify, so all of the code in our lib directory will get bundled up and served to our index.html when the `npm start` command is run. You can then just open up `index.html` in Chrome to see the app up and running.
 
 ## CSS
-The CSS in this code is extremely basic. It simply sets the color of our table cells in their various states. Inactive, Player, Tail and Food.
+The CSS in this code is extremely basic. It simply sets the size and color of our table cells in their various states. Inactive, Player, Tail and Food.
 
 ## JavaScript
-The skeleton for this project is already laid out. We have all our controllers, it's just a matter of determining the actions our methods need to perform to get it all up and running. Remember, this game is an exercise in Object Oriented Programming. We're going to be building all of our state variables and functions as *key : value* pairs within the controller objects. The controllers will then be required in where needed. IE: `var player = require('./playerController')`. And you will call your methods off the variables. IE: `player.movePlayer()`.
+The skeleton for this project is already laid out. We have all our controllers, it's just a matter of determining the actions our methods need to perform to get it all up and running. Remember, this game is an exercise in Object Oriented Programming. We're going to be building all of our state variables and functions as *key : value* pairs within the controller objects. The controllers will then be required in where needed. IE: `var player = require('./playerController')`. And you will call your methods off the objects. IE: `player.movePlayer()`.
 
 ## The Table
 HTML tables, rows and cells can be a little tricky to navigate when you first start using them. However, they do offer a reliable and scalable way to manage game boards, and are perfect for our purposes. Instead of hard coding one in, we're going to be generating a square table programmatically. Based on a size variable we pass in, our `generateTable` method should build the game board for us. Nested for loops should do the trick:
@@ -56,7 +56,7 @@ generateTable: function (size) {
 A big part of this project revolves around using jQuery objects and functions. Especially important is being able to find and manipulate cells, based on the direction your snake is facing. The [.closest()](https://api.jquery.com/closest/) and [.next()](https://api.jquery.com/next/) functions might be especially useful here.
 
 ## Intervals
-All of the timed events in this game will be controlled with `window.setInterval()`. Documentation for which can be found [here](http://www.w3schools.com/jsref/met_win_setinterval.asp). You set intervals to perform certain action after a certain number of milliseconds. IE:
+All of the timed events in this game will be controlled with `window.setInterval()`. Documentation for which can be found [here](http://www.w3schools.com/jsref/met_win_setinterval.asp). You set intervals to execute a certain function, after a certain number of milliseconds. IE:
 ```
 var foodInterval = window.setInterval(function() {
   foodController.handleFood()
@@ -71,6 +71,8 @@ We probably want to move our snake using the arrow, or ASDW keys. The `inputCont
 By far the trickiest part of this game is the snake's tail. Getting it to follow the player, and grow when new food is consumed, is a tough thing. The majority of the heavy lifting will be done over in the `tailController.update()` function. What might that look like?
 ```
 update: function (newCell) {
+  tail: [],
+
   for (var i = 0; i < this.tail.length; i++) {
 
     // the tail array contains cells that currently contain tail
@@ -95,8 +97,8 @@ Try going to your peers, teachers and Google before checking out the solution br
 Finished and bored? There are so many interesting ways you can extend this game. Try creating poisonous food to avoid, or enemy snakes. Make it multiplayer, or a 3D MMORPG. Your powers are literally limitless.
 
 ## Useful links
-[jQuery Documentation](https://api.jquery.com/)
-[Object Oriented Programming Overview](https://www.youtube.com/watch?v=NUl8lcbeN2Y)
-[Event Listeners](http://www.w3schools.com/jsref/met_document_addeventlistener.asp)
-[Working with HTML Tables](https://css-tricks.com/complete-guide-table-element/)
-[Snakes](https://www.google.com/search?site=&tbm=isch&source=hp&biw=1212&bih=527&q=snakes&oq=snakes&gs_l=img.3...1294.1797.0.1903.0.0.0.0.0.0.0.0..0.0....0...1ac.1.64.img..0.0.0.5Q2CSDDNUa8)
+1. [jQuery Documentation](https://api.jquery.com/)
+1. [Object Oriented Programming Overview](https://www.youtube.com/watch?v=NUl8lcbeN2Y)
+1. [Event Listeners](http://www.w3schools.com/jsref/met_document_addeventlistener.asp)
+1. [Working with HTML Tables](https://css-tricks.com/complete-guide-table-element/)
+1. [Snakes](https://www.google.com/search?site=&tbm=isch&source=hp&biw=1212&bih=527&q=snakes&oq=snakes&gs_l=img.3...1294.1797.0.1903.0.0.0.0.0.0.0.0..0.0....0...1ac.1.64.img..0.0.0.5Q2CSDDNUa8)
