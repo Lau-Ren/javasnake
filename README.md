@@ -1,11 +1,11 @@
 # Object Oriented Javasnake
-Build a simple snake game with HTML, Object Oriented JavaScript, CSS and jQuery.
+Build a simple [snake game](http://playsnake.org/) with HTML, Object Oriented JavaScript, CSS and jQuery.
 
 ## Learning Objectives
 1. Master HTML tables, rows and cells.
 1. Practice using several useful jQuery methods, including: `addClass, removeClass, hasClass, next, closest, children, index, append, on`, and `eq`.
 1. Learn about using `window.setInterval()` to handle timed or reoccurring events.
-1. Really embrace the idea of objects as modules. Give each of your controller objects its own .js file, and require them in as needed.
+1. Really embrace the idea of objects as modules. Each of your controller objects has its own .js file. Require them in as needed.
 1. Make the game your own! Go wild with the CSS, or add in a unique new feature.
 
 ## Plan
@@ -72,9 +72,13 @@ By far the trickiest part of this game is the snake's tail. Getting it to follow
 ```
 update: function (newCell) {
   for (var i = 0; i < this.tail.length; i++) {
+
     // the tail array contains cells that currently contain tail
-    // on every update, the tail cells eeds to slide forwards, one position
-    previousCell = this.tail[i]
+    // the iterator of this for loop starts this.tail[i], the first cell in the tail array
+    // on every update, the tail cells need to slide forwards, one position
+    // the trick is, you store a reference to your previous cell, and your next cell.
+    // this function might end like this:
+
     this.tail[i] = newCell
     newCell = previousCell
   }
@@ -82,4 +86,17 @@ update: function (newCell) {
 ```
 
 ## Game Over
-What are the conditions that must be met for the game to be over?
+What are the conditions that must be met for the game to be over? When are you going to check if the snake has hit something, and how do you check what it hit? That logic could live over in `playerController.checkForCollisions()`.
+
+## So Stuck?
+Try going to your peers, teachers and Google before checking out the solution branch. Snake can offer some surprisingly complex problems, and occasionally feel insurmountable, but you will get there eventually.
+
+## Stretchy
+Finished and bored? There are so many interesting ways you can extend this game. Try creating poisonous food to avoid, or enemy snakes. Make it multiplayer, or a 3D MMORPG. Your powers are literally limitless.
+
+## Useful links
+[jQuery Documentation](https://api.jquery.com/)
+[Object Oriented Programming Overview](https://www.youtube.com/watch?v=NUl8lcbeN2Y)
+[Event Listeners](http://www.w3schools.com/jsref/met_document_addeventlistener.asp)
+[Working with HTML Tables](https://css-tricks.com/complete-guide-table-element/)
+[Snakes](https://www.google.com/search?site=&tbm=isch&source=hp&biw=1212&bih=527&q=snakes&oq=snakes&gs_l=img.3...1294.1797.0.1903.0.0.0.0.0.0.0.0..0.0....0...1ac.1.64.img..0.0.0.5Q2CSDDNUa8)
